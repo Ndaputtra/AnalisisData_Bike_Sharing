@@ -11,7 +11,7 @@ Data yang digunakan berasal dari dataset penyewaan sepeda di kota tertentu dalam
 """)
 
 # Step 1: Load Dataset dari file lokal
-DATA_URL = "D:/Penyimpanan Uama/BANGKIT 2024/Submision Dicoding Analisis data/Bike-sharing-dataset/day.csv"  # Sesuaikan path dataset
+DATA_URL = "Data/day.csv"  # Sesuaikan path dataset
 day_data = pd.read_csv(DATA_URL)
 
 # Step 2: Data Wrangling
