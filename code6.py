@@ -44,13 +44,14 @@ filtered_data['weathersit_label'] = filtered_data['weathersit'].map(weather_labe
 # Membuat palet warna yang menarik
 palette = sns.color_palette("Set2")
 
-plt.figure(figsize=(10, 6))
-sns.barplot(x='month', y='cnt', hue='weathersit_label', data=filtered_data, palette=palette)
-plt.xticks(rotation=45)
-plt.title('Pengaruh Cuaca dan Bulan terhadap Penyewaan Sepeda')
-plt.xlabel('Bulan')
-plt.ylabel('Jumlah Penyewaan Sepeda')
-st.pyplot(plt)
+# Membuat plot
+fig, ax = plt.subplots(figsize=(10, 6))
+sns.barplot(x='month', y='cnt', hue='weathersit_label', data=filtered_data, palette=palette, ax=ax)
+ax.set_xticklabels(ax.get_xticklabels(), rotation=45)
+ax.set_title('Pengaruh Cuaca dan Bulan terhadap Penyewaan Sepeda')
+ax.set_xlabel('Bulan')
+ax.set_ylabel('Jumlah Penyewaan Sepeda')
+st.pyplot(fig)
 st.markdown("""
 **Insight:** 
 - Cuaca yang lebih baik, seperti cerah atau sedikit berawan, cenderung meningkatkan jumlah penyewaan sepeda. 
@@ -64,6 +65,8 @@ Berikut adalah perbandingan antara jumlah pelanggan harian (casual) dengan pelan
 """)
 labels = ['Pelanggan Harian', 'Pelanggan Terdaftar']
 sizes = [filtered_data['casual'].sum(), filtered_data['registered'].sum()]
+
+# Membuat plot
 fig, ax = plt.subplots(figsize=(7, 7))
 ax.pie(sizes, explode=(0.1, 0), labels=labels, autopct='%1.1f%%', shadow=True, startangle=140, colors=palette)
 ax.axis('equal')
@@ -78,13 +81,14 @@ st.markdown("""
 Apakah penyewaan sepeda lebih banyak terjadi pada hari kerja atau akhir pekan? Grafik berikut menunjukkan pengaruh hari kerja dan akhir pekan terhadap jumlah penyewaan sepeda.
 """)
 
-plt.figure(figsize=(10, 6))
-sns.barplot(x='weekday', y='cnt', hue='workingday', data=filtered_data, palette="coolwarm")
-plt.title('Pengaruh Hari Kerja dan Akhir Pekan terhadap Penyewaan Sepeda')
-plt.xlabel('Hari dalam Minggu')
-plt.ylabel('Jumlah Penyewaan Sepeda')
-plt.legend(title="Working Day", labels=["Akhir Pekan", "Hari Kerja"])
-st.pyplot(plt)
+# Membuat plot
+fig, ax = plt.subplots(figsize=(10, 6))
+sns.barplot(x='weekday', y='cnt', hue='workingday', data=filtered_data, palette="coolwarm", ax=ax)
+ax.set_title('Pengaruh Hari Kerja dan Akhir Pekan terhadap Penyewaan Sepeda')
+ax.set_xlabel('Hari dalam Minggu')
+ax.set_ylabel('Jumlah Penyewaan Sepeda')
+ax.legend(title="Working Day", labels=["Akhir Pekan", "Hari Kerja"])
+st.pyplot(fig)
 st.markdown("""
 **Insight:** Penyewaan sepeda cenderung lebih tinggi pada hari kerja, yang menunjukkan bahwa sepeda sering digunakan untuk keperluan transportasi sehari-hari, seperti pergi bekerja.
 """)
